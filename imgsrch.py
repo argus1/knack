@@ -34,9 +34,18 @@ def search_images():
         # Extract the search results from the response
         search_results = response.json()['responses'][0]['webDetection']['webEntities']
 
-        # Print the search results
+        # Flag to indicate if 'medical' or 'device' is found in any description
+        flag = False
+
+        # Check if 'medical' or 'device' is present in any description
         for result in search_results:
-            print(result['description'])
+            if 'medical' in result['description'].lower() or 'device' in result['description'].lower():
+                flag = True
+                break
+
+        if flag:
+            # Do something when 'medical' or 'device' is found
+            print("Flag triggered!")
 
         return 'Search completed successfully'
     else:
